@@ -1,7 +1,7 @@
 import React from 'react'
 import Notification from './Notification'
 import BlogForm from './BlogForm'
-import Blog from './Blog'
+import { Blog } from './Blog'
 import Togglable from './Togglable'
 
 const BlogList = ({

@@ -52,11 +52,19 @@ const Blog = ({ blog, blogs, setBlogs, user }) => {
       return (
         <div style={blogStyle}>
           <div onClick={() => setExpand(!expand)}>
-            {blog.title} {blog.author} <br/>
-            {blog.url} <br/>
-            {blog.likes} likes
-            <button onClick={handleLike}>like</button> <br/>
-            added by {blog.user.name} <br/>
+            <div>
+              {blog.title} {blog.author}
+            </div>
+            <div>
+              {blog.url}
+            </div>
+            <div>
+              {blog.likes} likes
+              <button onClick={handleLike}>like</button>
+            </div>
+            <div>
+              added by {blog.user.name}
+            </div>
             <RemoveButton currentUser={user} clickHandler={handleRemoval} blog={blog}/>
           </div>
         </div>
@@ -64,10 +72,8 @@ const Blog = ({ blog, blogs, setBlogs, user }) => {
     }
 
     return (
-      <div style={blogStyle}>
-        <div onClick={() => setExpand(!expand)}>
-          {blog.title} {blog.author}
-        </div>
+      <div className="blogDisplay" style={blogStyle} onClick={() => setExpand(!expand)}>
+        {blog.title} {blog.author}
       </div>
     )
   }
@@ -79,4 +85,7 @@ const Blog = ({ blog, blogs, setBlogs, user }) => {
   )
 }
 
-export default Blog
+export {
+  Blog,
+  RemoveButton
+}
