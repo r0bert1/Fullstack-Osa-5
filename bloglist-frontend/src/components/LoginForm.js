@@ -1,16 +1,21 @@
 import React from 'react'
 import Notification from './Notification'
 import PropTypes from 'prop-types'
+import { useField } from '../hooks/index'
 
 const LoginForm = ({
   handleSubmit,
-  handleUsernameChange,
-  handlePasswordChange,
   message,
   username,
   password,
-  user
+  user,
+  setUsername,
+  setPassword
 }) => {
+  const { reset: resetUser, ...userInput } = useField('text', 'Username', username, setUsername)
+  const { reset: resetPass, ...passInput } = useField('password', 'Password', password, setPassword)
+
+
 
   if (user === null) {
 
@@ -21,21 +26,11 @@ const LoginForm = ({
         <form onSubmit={handleSubmit}>
           <div>
             käyttäjätunnus
-            <input
-              type="text"
-              value={username}
-              name="Username"
-              onChange={handleUsernameChange}
-            />
+            <input {...userInput} />
           </div>
           <div>
             salasana
-            <input
-              type="password"
-              value={password}
-              name="Password"
-              onChange={handlePasswordChange}
-            />
+            <input {...passInput}/>
           </div>
           <button type="submit">login</button>
         </form>
@@ -48,8 +43,8 @@ const LoginForm = ({
 
 LoginForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
-  handleUsernameChange: PropTypes.func.isRequired,
-  handlePasswordChange: PropTypes.func.isRequired,
+  setUsername: PropTypes.func.isRequired,
+  setPassword: PropTypes.func.isRequired,
   username: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired
 }

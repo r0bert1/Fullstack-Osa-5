@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import blogService from '../services/blogs'
+import { useField } from '../hooks/index'
 
 const BlogForm = ({ user, setMessage, blogs, setBlogs }) => {
 
@@ -17,6 +18,8 @@ const BlogForm = ({ user, setMessage, blogs, setBlogs }) => {
         title, author, url, userId,
       })
 
+      console.log(newBlog)
+
       setBlogs(blogs.concat(newBlog))
       setMessage(`a new blog ${title} by ${author} added`)
       setTimeout(() => {
@@ -33,36 +36,26 @@ const BlogForm = ({ user, setMessage, blogs, setBlogs }) => {
     }
   }
 
+  const { reset: resetTitle, ...blogTitle } = useField('text', 'Title', title, setTitle)
+  const { reset: resetAuthor, ...blogAuthor } = useField('text', 'Author', author, setAuthor)
+  const { reset: resetUrl, ...blogUrl } = useField('text', 'Url', url, setUrl)
+
+
   return (
     <div>
       <h2>create new</h2>
       <form onSubmit={handleCreateNew}>
         <div>
           title:
-          <input
-            type="text"
-            value={title}
-            name="Text"
-            onChange={({ target }) => setTitle(target.value)}
-          />
+          <input {...blogTitle}/>
         </div>
         <div>
           author:
-          <input
-            type="text"
-            value={author}
-            name="Text"
-            onChange={({ target }) => setAuthor(target.value)}
-          />
+          <input {...blogAuthor}/>
         </div>
         <div>
           url:
-          <input
-            type="text"
-            value={url}
-            name="Text"
-            onChange={({ target }) => setUrl(target.value)}
-          />
+          <input {...blogUrl}/>
         </div>
         <button type="submit">create</button>
       </form>

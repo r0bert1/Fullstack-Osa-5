@@ -68,8 +68,8 @@ const App = () => {
         password={password}
         message={message}
         user={user}
-        handleUsernameChange={({ target }) => setUsername(target.value)}
-        handlePasswordChange={({ target }) => setPassword(target.value)}
+        setUsername={setUsername}
+        setPassword={setPassword}
         handleSubmit={handleLogin}
       />
     )
